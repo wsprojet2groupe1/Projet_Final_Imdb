@@ -13,7 +13,7 @@ st.set_page_config(
 @st.cache_resource
 def load_data():
     # Chemin du fichier CSV
-    movies_path = 'https://raw.githubusercontent.com/wsprojet2groupe1/Projet_Final_Imdb/main/df_with_recommendationsSTEST.csv'
+    movies_path = 'https://raw.githubusercontent.com/wsprojet2groupe1/Projet_Final_Imdb/main/df_with_recommendationsSfini.csv'
     
     # Lire les données
     movies = pd.read_csv(movies_path)
