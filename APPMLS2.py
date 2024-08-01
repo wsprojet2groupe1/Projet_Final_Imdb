@@ -13,7 +13,7 @@ st.set_page_config(
 @st.cache_resource
 def load_data():
     # Chemin du fichier CSV
-    movies_path = 'https://raw.githubusercontent.com/wsprojet2groupe1/Projet_Final_Imdb/main/df_with_recommendationsSfini.csv'
+    movies_path = 'https://raw.githubusercontent.com/NourBedoui/IMDbProjet2/master/df_with_recommendationsSTEST.csv'
     
     # Lire les données
     movies = pd.read_csv(movies_path)
@@ -37,15 +37,18 @@ def recommend_movies(title, movies):
     recommendations = []
 
     for i in range(1, 6):  # Les colonnes des films recommandés sont numérotées de 1 à 5
+        recommended_title = movies[f'Film {i}'][idx]  # Get the recommended movie title
+        recommended_idx = movies[movies['primaryTitle'] == recommended_title].index[0]  # Get the index of the recommended movie
+        
         recommendations.append({
-            'primaryTitle': movies[f'Film {i}'][idx],
+            'primaryTitle': recommended_title,
             'overview': movies[f'overview_{i}'][idx],
             'genresST': movies[f'genresST_{i}'][idx],
             'primaryName': movies[f'primaryName_{i}'][idx],
             'averageRating': movies[f'averageRating_{i}'][idx],
             'startYear': movies[f'startYear_{i}'][idx],
             'poster_path': movies[f'poster_path_{i}'][idx],
-            'tconst': movies['tconst'][idx]
+            'tconst': movies['tconst'][recommended_idx]  # Use the recommended movie's tconst
         })
     
     # Convert list of dictionaries to DataFrame
